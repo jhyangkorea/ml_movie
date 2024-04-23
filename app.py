@@ -70,7 +70,7 @@ def feedback():
     if feedback == 'Incorrect':
         y = int(not(y))
     train(review, y)
-    sqlite_entry(db, review, y)
+    sqlite_entry(reviews.sqlite, review, y)
     return render_template('thanks.html')
 
 if __name__ == '__main__':
