@@ -15,7 +15,7 @@ cur_dir = os.path.dirname(__file__)
 clf = pickle.load(open(os.path.join(cur_dir,
                  'pkl_objects',
                  'classifier.pkl'), 'rb'))
-db = os.path.join(cur_dir, 'reviews.sqlite')
+db_path = os.path.join(cur_dir, 'reviews.sqlite')
 
 def classify(document):
     label = {0: 'negative', 1: 'positive'}
@@ -70,7 +70,7 @@ def feedback():
     if feedback == 'Incorrect':
         y = int(not(y))
     train(review, y)
-    sqlite_entry(reviews.sqlite, review, y)
+    sqlite_entry(db_path, review, y)
     return render_template('thanks.html')
 
 if __name__ == '__main__':
