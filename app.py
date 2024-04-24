@@ -4,6 +4,8 @@ import pickle
 import sqlite3
 import os
 import numpy as np
+import datetime
+    
 
 # import HashingVectorizer from local dir
 #from vectorizer import vect
@@ -31,8 +33,9 @@ def train(document, y):
 def sqlite_entry(path, document, y):
     conn = sqlite3.connect(path)
     c = conn.cursor()
-    c.execute("INSERT INTO reviews (review, sentiment, date)"\
-    " VALUES (?, ?, DATETIME('now'))", (document, y))
+    currentDateTime = datetime.datetime.now()
+    c.execute("INSERT INTO reviews (review, sentiment)" " VALUES (?, ?, ?)", (document, y, currentDateTime))
+    #c.execute("INSERT INTO reviews (review, sentiment, date)" " VALUES (?, ?, DATETIME('now'))", (document, y))
     conn.commit()
     conn.close()
 
